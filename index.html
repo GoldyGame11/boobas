@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BooBas Wiki — Фан-гайд</title>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #6ee7ff;
+    --accent2: #00c8ef;
+    --accent-glow: #6ee7ff88;
+    --bg: #f0fcff;
+    --bg2: #e0f7fd;
+    --card: #ffffff;
+    --text: #0a2233;
+    --text2: #2a5a7a;
+    --border: #b8eef8;
+    --shadow: 0 4px 32px #6ee7ff33;
+    --radius: 18px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Exo 2', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* BACKGROUND GRID */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(110,231,255,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(110,231,255,0.07) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* HEADER */
+  header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 48px 20px 32px;
+    background: linear-gradient(180deg, #d0f5ff 0%, transparent 100%);
+  }
+
+  .logo-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 10px;
+  }
+
+  .logo-icon {
+    width: 64px; height: 64px;
+    background: var(--accent);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+    box-shadow: 0 0 32px var(--accent-glow), 0 0 8px var(--accent);
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 32px var(--accent-glow), 0 0 8px var(--accent); }
+    50% { box-shadow: 0 0 60px #6ee7ffaa, 0 0 24px var(--accent); }
+  }
+
+  header h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 2px;
+  }
+
+  header h1 span {
+    color: var(--accent2);
+    text-shadow: 0 0 16px var(--accent-glow);
+  }
+
+  .header-sub {
+    font-size: 1rem;
+    color: var(--text2);
+    margin-top: 6px;
+    letter-spacing: 1px;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(240,252,255,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1.5px solid var(--border);
+    box-shadow: 0 2px 24px #6ee7ff22;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 10px 16px;
+    flex-wrap: wrap;
+  }
+
+  .nav-btn {
+    background: none;
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+    padding: 8px 20px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent2);
+    background: rgba(110,231,255,0.1);
+  }
+
+  .nav-btn.active {
+    background: var(--accent);
+    color: #0a2233;
+    border-color: var(--accent);
+    box-shadow: 0 0 16px var(--accent-glow);
+  }
+
+  /* MAIN CONTENT */
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 16px 80px;
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title .emoji-icon {
+    font-size: 1.6rem;
+    filter: drop-shadow(0 0 8px var(--accent));
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    transition: transform 0.18s, box-shadow 0.18s;
+    transform-style: preserve-3d;
+  }
+
+  .card:hover {
+    box-shadow: 0 8px 48px #6ee7ff55;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .card-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-body {
+    font-size: 0.92rem;
+    color: var(--text2);
+    line-height: 1.65;
+  }
+
+  /* LOCATION CARD */
+  .loc-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .loc-card .loc-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .loc-emoji {
+    font-size: 2.2rem;
+    filter: drop-shadow(0 0 8px var(--accent));
+  }
+
+  .loc-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .loc-desc {
+    font-size: 0.9rem;
+    color: var(--text2);
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+
+  /* ENEMY TABLE */
+  .enemy-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.87rem;
+    margin-bottom: 14px;
+  }
+
+  .enemy-table th {
+    background: linear-gradient(90deg, var(--accent) 0%, #b8eef8 100%);
+    color: #0a2233;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    padding: 7px 10px;
+    text-align: left;
+    font-size: 0.88rem;
+    letter-spacing: 0.3px;
+  }
+
+  .enemy-table th:first-child { border-radius: 8px 0 0 8px; }
+  .enemy-table th:last-child { border-radius: 0 8px 8px 0; }
+
+  .enemy-table td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text2);
+    vertical-align: top;
+  }
+
+  .enemy-table tr:last-child td { border-bottom: none; }
+
+  .enemy-table tr:hover td { background: rgba(110,231,255,0.07); }
+
+  .boss-row td { color: #c0392b; font-weight: 600; }
+
+  /* BUILD BOX */
+  .build-box {
+    background: linear-gradient(135deg, #f0fcff, #e0f7fd);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+    transition: box-shadow 0.2s;
+  }
+
+  .build-box:hover { box-shadow: 0 4px 24px #6ee7ff44; }
+
+  .build-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 4px;
+  }
+
+  .build-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .build-components {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  .build-tag {
+    background: var(--accent);
+    color: #0a2233;
+    border-radius: 8px;
+    padding: 4px 12px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    font-family: 'Rajdhani', sans-serif;
+    box-shadow: 0 2px 8px #6ee7ff44;
+  }
+
+  .build-desc {
+    font-size: 0.9rem;
+    color: var(--text2);
+    line-height: 1.55;
+  }
+
+  /* MECHANICS */
+  .mechanic-card {
+    border-top: 4px solid var(--accent);
+  }
+
+  .badge {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    color: #0a2233;
+    border-radius: 6px;
+    padding: 2px 10px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 0.5px;
+    margin-right: 6px;
+    margin-bottom: 4px;
+  }
+
+  .badge.rare { background: linear-gradient(90deg, #9b59b6, #6c3483); color: white; }
+  .badge.epic { background: linear-gradient(90deg, #e67e22, #d35400); color: white; }
+  .badge.legendary { background: linear-gradient(90deg, #f39c12, #e67e22); color: white; }
+  .badge.mythic { background: linear-gradient(90deg, #e74c3c, #922b21); color: white; }
+  .badge.boss { background: linear-gradient(90deg, #c0392b, #922b21); color: white; }
+  .badge.tip { background: linear-gradient(90deg, #1abc9c, #16a085); color: white; }
+
+  .tip-box {
+    background: linear-gradient(90deg, rgba(110,231,255,0.15), rgba(110,231,255,0.05));
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 10px 14px;
+    margin-top: 10px;
+    font-size: 0.88rem;
+    color: var(--text2);
+    line-height: 1.55;
+  }
+
+  .warn-box {
+    background: rgba(231,76,60,0.08);
+    border-left: 3px solid #e74c3c;
+    border-radius: 0 10px 10px 0;
+    padding: 10px 14px;
+    margin-top: 10px;
+    font-size: 0.88rem;
+    color: #7a2233;
+    line-height: 1.55;
+  }
+
+  /* META TIER */
+  .tier-s { border-left: 4px solid #f1c40f; }
+  .tier-a { border-left: 4px solid #6ee7ff; }
+  .tier-b { border-left: 4px solid #2ecc71; }
+
+  .tier-badge {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    width: 48px; height: 48px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .tier-badge.s { background: #f1c40f; color: #0a2233; }
+  .tier-badge.a { background: var(--accent); color: #0a2233; }
+  .tier-badge.b { background: #2ecc71; color: #fff; }
+
+  .tactic-card {
+    border-right: 4px solid var(--accent);
+  }
+
+  /* GLOW LINE */
+  .glow-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    margin: 28px 0;
+    border: none;
+  }
+
+  /* INTRO HERO */
+  .hero-intro {
+    background: linear-gradient(135deg, #d0f5ff 0%, #ffffff 100%);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .hero-intro::before {
+    content: '🎮';
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 5rem;
+    opacity: 0.12;
+  }
+
+  .hero-intro h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+
+  .hero-intro p {
+    color: var(--text2);
+    line-height: 1.7;
+    font-size: 0.95rem;
+    max-width: 700px;
+  }
+
+  ul.styled-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 8px;
+  }
+
+  ul.styled-list li {
+    padding: 5px 0 5px 20px;
+    position: relative;
+    font-size: 0.9rem;
+    color: var(--text2);
+    line-height: 1.55;
+  }
+
+  ul.styled-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent2);
+    font-size: 0.85rem;
+  }
+
+  /* WEAPON GRID */
+  .weapon-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .weapon-row:last-child { border-bottom: none; }
+
+  .weapon-emoji {
+    font-size: 1.8rem;
+    filter: drop-shadow(0 0 6px var(--accent-glow));
+    width: 40px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .weapon-info { flex: 1; }
+
+  .weapon-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+
+  .weapon-desc {
+    font-size: 0.87rem;
+    color: var(--text2);
+    line-height: 1.5;
+  }
+
+  /* SCROLL TO TOP */
+  .scroll-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 200;
+    background: var(--accent);
+    color: #0a2233;
+    border: none;
+    border-radius: 50%;
+    width: 44px; height: 44px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 20px var(--accent-glow);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s;
+  }
+
+  .scroll-top:hover { transform: scale(1.12); }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .card-grid { grid-template-columns: 1fr; }
+    header { padding: 32px 16px 20px; }
+    .enemy-table { font-size: 0.78rem; }
+    .enemy-table th, .enemy-table td { padding: 5px 6px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <div class="logo-icon">🎮</div>
+    <h1>Boo<span>Bas</span></h1>
+  </div>
+  <p class="header-sub">Фанатский гайд · Стратегии · Сборки · Мета</p>
+</header>
+
+<nav>
+  <button class="nav-btn active" onclick="showTab('locations')">🗺 Локации</button>
+  <button class="nav-btn" onclick="showTab('mechanics')">⚙️ Механики</button>
+  <button class="nav-btn" onclick="showTab('meta')">👑 Мета</button>
+  <button class="nav-btn" onclick="showTab('builds')">🛠 Сборки</button>
+  <button class="nav-btn" onclick="showTab('tactics')">🗡 Тактики</button>
+</nav>
+
+<main>
+
+  <!-- ===================== LOCATIONS ===================== -->
+  <div id="tab-locations" class="tab-content active">
+    <div class="section-title"><span class="emoji-icon">🗺</span> Локации</div>
+
+    <div class="hero-intro">
+      <h2>Навигация по миру BooBas</h2>
+      <p>В игре 5 основных локаций и особая зона — Лаборатория. Каждая локация сложнее предыдущей: враги жирнее, урон выше, а награды значительно вкуснее. Ниже — детальный разбор каждой зоны, её врагов и рекомендации по сборке.</p>
+    </div>
+
+    <!-- СНЕГОВАЯ -->
+    <div class="card loc-card" style="margin-bottom:20px;">
+      <div class="loc-header">
+        <span class="loc-emoji">❄️</span>
+        <div>
+          <div class="loc-name">Снеговая локация</div>
+          <span class="badge">Старт</span>
+        </div>
+      </div>
+      <p class="loc-desc">Начальная зона для новых игроков. Враги слабые, урон минимальный — идеально для старта и первых апгрейдов. Здесь рекомендуется задержаться, пока урон не достигнет ~300–500.</p>
+      <table class="enemy-table">
+        <tr><th>Враг</th><th>HP</th><th>Урон</th><th>Опыт</th><th>Монеты</th></tr>
+        <tr>
+          <td>❄️ Комок снега</td>
+          <td>100</td><td>8</td><td>10</td><td>10–30</td>
+        </tr>
+        <tr>
+          <td>⛄ Снеговик</td>
+          <td>1 000</td><td>15</td><td>40</td><td>50–120</td>
+        </tr>
+        <tr class="boss-row">
+          <td>👑 Босс Снеговик <span class="badge boss">БОСС</span></td>
+          <td>10 000</td><td>35</td><td>150</td><td>4 000–5 000</td>
+        </tr>
+      </table>
+      <div class="tip-box">💡 <strong>Рекомендуемая сборка:</strong> На этой локации сборка не критична — любой класс и любое оружие подойдут. Если хочется оптимально — бери <strong>Damager</strong> с <strong>Палкой/Мечом</strong>. Фокус на прокачке урона через магазин.</div>
+    </div>
+
+    <!-- САФАРИ -->
+    <div class="card loc-card" style="margin-bottom:20px;">
+      <div class="loc-header">
+        <span class="loc-emoji">🌵</span>
+        <div>
+          <div class="loc-name">Сафари (Пустыня)</div>
+          <span class="badge">Новичок</span>
+        </div>
+      </div>
+      <p class="loc-desc">Первая «настоящая» зона. Кактус и Змея требуют уже базового понимания системы ударов. Скорпион-Босс с 20 000 HP — первый серьёзный экзамен на знание механик комбо.</p>
+      <table class="enemy-table">
+        <tr><th>Враг</th><th>HP</th><th>Урон</th><th>Опыт</th><th>Монеты</th></tr>
+        <tr>
+          <td>🌵 Кактус</td>
+          <td>500</td><td>20</td><td>50</td><td>150–200</td>
+        </tr>
+        <tr>
+          <td>🐍 Змея</td>
+          <td>1 200</td><td>30</td><td>100</td><td>300–500</td>
+        </tr>
+        <tr class="boss-row">
+          <td>🦂 Скорпион <span class="badge boss">БОСС</span></td>
+          <td>20 000</td><td>60</td><td>300</td><td>8 000–10 000</td>
+        </tr>
+      </table>
+      <div class="tip-box">💡 <strong>Рекомендуемая сборка:</strong> Начни использовать <strong>Lock In</strong> (если есть) или <strong>Damager</strong>. Оружие — <strong>Снежок</strong> для снижения входящего урона от Змеи, или <strong>Дарт</strong> для быстрого убийства Босса.</div>
+    </div>
+
+    <!-- РАВНИНЫ -->
+    <div class="card loc-card" style="margin-bottom:20px;">
+      <div class="loc-header">
+        <span class="loc-emoji">🌿</span>
+        <div>
+          <div class="loc-name">Равнины</div>
+          <span class="badge">Средний</span>
+        </div>
+      </div>
+      <p class="loc-desc">На Равнинах появляются враги с случайным уроном. Куст бьёт на 50–150, а Чучело — уже 300–350 за удар! Мега-муравей имеет шанс 70% уйти в защиту — здесь Defender становится крайне ценным классом.</p>
+      <table class="enemy-table">
+        <tr><th>Враг</th><th>HP</th><th>Урон</th><th>Опыт</th><th>Монеты</th></tr>
+        <tr>
+          <td>🌿 Куст</td>
+          <td>2 000</td><td>50–150</td><td>200</td><td>1 000–2 000</td>
+        </tr>
+        <tr>
+          <td>🧙 Чучело</td>
+          <td>3 500</td><td>300–350</td><td>400</td><td>2 000–5 000</td>
+        </tr>
+        <tr class="boss-row">
+          <td>🐜 Мега-муравей <span class="badge boss">БОСС</span></td>
+          <td>20 000</td><td>500–510</td><td>800</td><td>10 000–15 000</td>
+        </tr>
+      </table>
+      <div class="tip-box">💡 <strong>Рекомендуемая сборка:</strong> <strong>Defender + Костюм Робота</strong> — лучшая сборка здесь. Муравей часто защищается (70% шанс), Defender снижает его урон. Если нет Defender — бери <strong>Снежок</strong> для выживаемости. Щит оружием тоже хорош для Чучела.</div>
+    </div>
+
+    <!-- МАГМА -->
+    <div class="card loc-card" style="margin-bottom:20px;">
+      <div class="loc-header">
+        <span class="loc-emoji">🔥</span>
+        <div>
+          <div class="loc-name">Магма</div>
+          <span class="badge">Сложный</span>
+        </div>
+      </div>
+      <p class="loc-desc">Зона с врагами, умеющими сбивать комбо. Магма Суфик специально ломает твоё комбо — не теряй его! Магма Мутант — мини-эндгейм с 170 000 HP, защищается 70% времени и даёт золотой билет при победе.</p>
+      <table class="enemy-table">
+        <tr><th>Враг</th><th>HP</th><th>Урон</th><th>Опыт</th><th>Монеты</th></tr>
+        <tr>
+          <td>🔥 Магма шар</td>
+          <td>10 000</td><td>800–1 500</td><td>500</td><td>9 500–15 000</td>
+        </tr>
+        <tr>
+          <td>👾 Магма суфик</td>
+          <td>25 000</td><td>1 500–3 000</td><td>1 000</td><td>15 000–30 000</td>
+        </tr>
+        <tr class="boss-row">
+          <td>🧟 Магма мутант <span class="badge boss">БОСС</span><span class="badge legendary">🎫</span></td>
+          <td>170 000</td><td>2 000–5 000</td><td>5 000</td><td>300 000–500 000</td>
+        </tr>
+      </table>
+      <div class="tip-box">💡 <strong>Рекомендуемая сборка:</strong> <strong>Lock In + Дарт</strong> — оптимально для быстрого сноса Мутанта. Дарт при 3+ комбо даёт x2 урон, что вместе с Lock In делает колоссальный DPS. Для выживания — <strong>Defender</strong> с роботкостюмом, если HP мало. Поддерживай комбо любой ценой!</div>
+      <div class="warn-box">⚠️ Магма Суфик сбивает комбо! Будь готов к потере множителя. Revenge-класс тут неплох — после сброса комбо следующий удар x10.</div>
+    </div>
+
+    <!-- ПИРАТЫ -->
+    <div class="card loc-card" style="margin-bottom:20px;">
+      <div class="loc-header">
+        <span class="loc-emoji">🏴‍☠️</span>
+        <div>
+          <div class="loc-name">Пиратская локация</div>
+          <span class="badge epic">Хардкор</span>
+        </div>
+      </div>
+      <p class="loc-desc">Начинается настоящий эндгейм. Краб и Гига-Осьминог — враги с механикой штрафа при потере комбо. Краб: потеря комбо = -10% урона на 3 удара. Осьминог: потеря комбо = -100% урона на 3 удара!</p>
+      <table class="enemy-table">
+        <tr><th>Враг</th><th>HP</th><th>Урон</th><th>Опыт</th><th>Монеты</th></tr>
+        <tr>
+          <td>🏴‍☠️ Пират</td>
+          <td>300 000</td><td>3 000–4 000</td><td>10 000</td><td>200k–900k</td>
+        </tr>
+        <tr>
+          <td>🦀 Краб</td>
+          <td>500 000</td><td>10 000–20 000</td><td>20 000</td><td>500k–1M</td>
+        </tr>
+        <tr class="boss-row">
+          <td>🐙 Гига-Осьминог <span class="badge boss">БОСС</span><span class="badge legendary">🎫</span></td>
+          <td>3 000 000</td><td>20 000–50 000</td><td>50 000</td><td>3M–4M</td>
+        </tr>
+      </table>
+      <div class="tip-box">💡 <strong>Рекомендуемая сборка:</strong> <strong>Lock In + Дарт</strong> — максимальный урон при чистом комбо. Против Осьминога ОБЯЗАТЕЛЬНО поддерживай комбо — иначе 3 удара впустую. <strong>Снежок</strong> для снижения его урона — полезно при стаке комбо.</div>
+      <div class="warn-box">⚠️ Гига-Осьминог — штраф при потере комбо x0.0 (0% урона) на 3 удара. Один промах — и ты просто стоишь. Lock In + Дарт позволяют убить его быстро, не давая времени на штрафы.</div>
+    </div>
+
+    <!-- ОКЕАН -->
+    <div class="card loc-card" style="margin-bottom:20px;">
+      <div class="loc-header">
+        <span class="loc-emoji">🌊</span>
+        <div>
+          <div class="loc-name">Океан (Финальная зона)</div>
+          <span class="badge mythic">Эндгейм</span>
+        </div>
+      </div>
+      <p class="loc-desc">Финальный рубеж. Водоросли с 10 миллионами HP — разминка. Рыба сбивает комбо. Гига-рыба — 3 миллиарда HP с нулевым уроном при потере комбо. За ней — финальный босс всей игры: Глубоководная Косатка с 30 миллиардами HP.</p>
+      <table class="enemy-table">
+        <tr><th>Враг</th><th>HP</th><th>Урон</th><th>Опыт</th><th>Монеты</th></tr>
+        <tr>
+          <td>🌿 Водоросли</td>
+          <td>10M</td><td>50k–100k</td><td>50 000</td><td>900k–1M</td>
+        </tr>
+        <tr>
+          <td>🐟 Рыба</td>
+          <td>50M</td><td>100k–500k</td><td>100 000</td><td>1M–10M</td>
+        </tr>
+        <tr class="boss-row">
+          <td>🐋 Гига-рыба <span class="badge boss">ФИНАЛ</span><span class="badge legendary">🎫🔴</span></td>
+          <td>3B</td><td>300k–500k</td><td>500 000</td><td>9.8M</td>
+        </tr>
+        <tr class="boss-row">
+          <td>🐬 Глубоководная Косатка <span class="badge mythic">ФИНАЛ</span></td>
+          <td>30B</td><td>1M–10M</td><td>2 000 000</td><td>50M–100M</td>
+        </tr>
+      </table>
+      <div class="tip-box">💡 <strong>Рекомендуемая сборка:</strong> <strong>Lock In + Костюм Робота</strong> — единственный реальный вариант для Гига-рыбы и Косатки. Костюм даёт 100% неуязвимость на 2 хода при защите + 50% восстановление HP. Lock In стакает урон. Против Косатки — Defender, т.к. она блокирует 10% атак абсолютно.</div>
+      <div class="warn-box">⚠️ Гига-рыба: потеря комбо = 0% урона 3 хода. Требуется урон 1M+ для реального прогресса. Это сборка для гига-рыбаков — без максимальных статов не суйся!</div>
+    </div>
+
+    <!-- ЛАБОРАТОРИЯ -->
+    <div class="card" style="margin-bottom:20px; border-top:4px solid #9b59b6;">
+      <div class="loc-header">
+        <span class="loc-emoji">🔬</span>
+        <div>
+          <div class="loc-name">Лаборатория</div>
+          <span class="badge rare">Ежедневно</span>
+        </div>
+      </div>
+      <p class="loc-desc">Особая локация: каждый день 3 случайных врага из других зон (кроме снеговой). Сбрасывается по киевскому времени в 00:00. За победы получаешь <strong>Гены 🧬</strong>, которые открывают мутации.</p>
+      <div class="tip-box">💡 Гены конвертируются в мутации через открутку. Мутации дают пассивные бонусы вроде x2 урона каждый 3-й удар (Пожирание) или x10 каждый 5-й (Гуматон). Выбирай врагов по силе — иногда выгоднее убить слабого 3 раза, чем одного сильного.</div>
+    </div>
+
+  </div>
+
+  <!-- ===================== MECHANICS ===================== -->
+  <div id="tab-mechanics" class="tab-content">
+    <div class="section-title"><span class="emoji-icon">⚙️</span> Механики</div>
+
+    <!-- УДАРЫ -->
+    <div class="card mechanic-card" style="margin-bottom:20px;">
+      <div class="card-title">⚡ Система ударов: Таймингив</div>
+      <div class="card-body">
+        В BooBas каждый удар оценивается по тому, насколько точно ты нажал кнопку. Есть два типа успешного удара:
+        <ul class="styled-list" style="margin-top:10px;">
+          <li><strong>Идеальный удар (Perfect)</strong> — нажал точно в нужный тайминг. Засчитывается в <em>perfect_combo_counter</em>. Активирует способности классов типа Lock In, Defender, Ultra get.</li>
+          <li><strong>Хороший удар (Good)</strong> — нажал чуть не вовремя, но попал. Засчитывается в общий <em>combo_counter</em>. Активирует Damager (если серия хороших).</li>
+          <li><strong>Промах/Защита врага</strong> — комбо сбрасывается. Если у врага есть штраф при сбросе комбо — он активируется.</li>
+        </ul>
+        <div class="tip-box" style="margin-top:12px;">💡 Как ловить таймингив: смотри на анимацию атаки и жми кнопку атаки в момент, когда враг «готов» получить удар. Со временем выработается мышечная память. Идеальные удары дают разы больше DPS с крутыми классами.</div>
+      </div>
+    </div>
+
+    <!-- КОМБО -->
+    <div class="card mechanic-card" style="margin-bottom:20px;">
+      <div class="card-title">🔥 Система Комбо</div>
+      <div class="card-body">
+        Комбо — ключевая механика игры. Каждый успешный удар без пропуска увеличивает <strong>combo_counter</strong>. Некоторые классы используют этот счётчик для усиления урона.
+        <br><br>
+        <strong>Как работает комбо по классам:</strong>
+        <ul class="styled-list" style="margin-top:8px;">
+          <li><strong>💢 Damager</strong>: каждый хороший удар в серии = +10% к следующему удару (накапливается)</li>
+          <li><strong>🛡️ Ironer</strong>: каждый ИДЕАЛЬНЫЙ в комбо = множитель +0.5 (1 → x1.5, 2 → x2.0...)</li>
+          <li><strong>🧛 Vampire</strong>: каждый удар в комбо = -5% HP себе, но x2 к урону этого удара</li>
+          <li><strong>🛡️ Defender</strong>: каждый ИДЕАЛЬНЫЙ в комбо = -10% к урону врага (пассивная защита, стакается)</li>
+          <li><strong>✨ Ultra get</strong>: каждый ИДЕАЛЬНЫЙ в комбо = +20% к урону (суммируется)</li>
+          <li><strong>⚡ Revenge</strong>: потеря комбо из 3+ идеальных = следующий удар x10</li>
+          <li><strong>🔥 Lock In</strong>: каждый ИДЕАЛЬНЫЙ в комбо = множитель +2 (1→x2, 2→x4, 3→x6...)</li>
+        </ul>
+        <div class="tip-box" style="margin-top:12px;">💡 Lock In — самый сильный класс: уже на 3-ом идеальном удар множитель x6! Но Vampire опасен — он жертвует HP ради урона. Не используй Vampire без большого запаса здоровья.</div>
+        <div class="warn-box" style="margin-top:8px;">⚠️ Враги типа Краб, Осьминог, Гига-Рыба и Косатка <strong>сбивают комбо</strong>. Всегда следи за механикой конкретного врага перед боем.</div>
+      </div>
+    </div>
+
+    <!-- ПРОКАЧКА -->
+    <div class="card mechanic-card" style="margin-bottom:20px;">
+      <div class="card-title">📈 Прокачка персонажа</div>
+      <div class="card-body">
+        Через магазин (Shop Upgrades) можно прокачать 3 основных стата:
+        <ul class="styled-list" style="margin-top:8px;">
+          <li><strong>⚔️ Урон (Damage)</strong> — стоит 30 монет за уровень, максимум 200 апгрейдов (лимит стата 10 000 000)</li>
+          <li><strong>⏱ Кулдаун (Cooldown)</strong> — стоит 200 монет за уровень, максимум 0.2 сек снижения</li>
+          <li><strong>❤️ Здоровье (HP)</strong> — стоит 80 монет за уровень, максимум 2000 апгрейдов (лимит 100 000 000 HP)</li>
+        </ul>
+        <br>Дополнительный урон/хп можно получить через:
+        <ul class="styled-list">
+          <li>🏭 <strong>Завод</strong> — пассивная генерация урона и HP каждые 5 часов через детали</li>
+          <li>🔴 <strong>Красные билеты</strong> — дают +50k урона или +100k HP за штуку</li>
+          <li>⚡ <strong>Металосток (забеги)</strong> — особый режим с наградами в виде урона и HP</li>
+          <li>🎁 <strong>Ежедневный подарок</strong> — бесплатные бонусы каждый день</li>
+          <li>🎫 <strong>Slay Pass</strong> — сезонный пропуск с наградами до 20 уровня</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ОРУЖИЕ -->
+    <div class="card mechanic-card" style="margin-bottom:20px;">
+      <div class="card-title">🗡 Система Оружия</div>
+      <div class="card-body">
+        Оружие — расходуемая способность с кулдауном в ходах. После использования ждёшь N ходов перед повторным применением.
+        <br><br>
+        <div class="weapon-row">
+          <div class="weapon-emoji">🪵</div>
+          <div class="weapon-info">
+            <div class="weapon-name">Палка <span class="badge">Обычное</span></div>
+            <div class="weapon-desc">+10% к следующим 2 ходам (урон или защита). КД: 2 хода. Самое простое оружие для старта.</div>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-emoji">🗡</div>
+          <div class="weapon-info">
+            <div class="weapon-name">Меч <span class="badge">Обычное</span></div>
+            <div class="weapon-desc">Атака с +10% к урону. КД: 3 хода.</div>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-emoji">⚔️</div>
+          <div class="weapon-info">
+            <div class="weapon-name">2 Меча <span class="badge rare">Редкое</span></div>
+            <div class="weapon-desc">Атака с +20% к урону. КД: 4 хода. Хорошо для разминки.</div>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-emoji">🏹</div>
+          <div class="weapon-info">
+            <div class="weapon-name">Лук <span class="badge rare">Редкое</span></div>
+            <div class="weapon-desc">Атака с +30% к урону. КД: 4 хода.</div>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-emoji">🛡</div>
+          <div class="weapon-info">
+            <div class="weapon-name">Щит <span class="badge" style="background:linear-gradient(90deg,#8e44ad,#6c3483);color:white">Эпик</span></div>
+            <div class="weapon-desc">Следующая защита = 100% неуязвимость + регенерация +15% HP. КД: 4 хода. Очень полезен против боссов.</div>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-emoji">🦔</div>
+          <div class="weapon-info">
+            <div class="weapon-name">Шипы <span class="badge" style="background:linear-gradient(90deg,#8e44ad,#6c3483);color:white">Эпик</span></div>
+            <div class="weapon-desc">Следующие 3 атаки врага наносят ему 50% его же урона. КД: 5 ходов. Отлично против врагов с высоким уроном.</div>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-emoji">🌨</div>
+          <div class="weapon-info">
+            <div class="weapon-name">Снежок <span class="badge legendary">Легендарное</span></div>
+            <div class="weapon-desc">Враг наносит на 50% меньше урона следующие 3 атаки. КД: 3 хода. Топовая выживаемость — использовать при сложных боссах.</div>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-emoji">🔥</div>
+          <div class="weapon-info">
+            <div class="weapon-name">Фаербол <span class="badge" style="background:linear-gradient(90deg,#8e44ad,#6c3483);color:white">Эпик</span></div>
+            <div class="weapon-desc">Пассивный урон врагу 3 хода (10% от твоего урона/ход). КД: 4 хода. Хорошо стакается с Lock In для финального DPS.</div>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-emoji">🎯</div>
+          <div class="weapon-info">
+            <div class="weapon-name">Дарт <span class="badge mythic">Мистическое</span></div>
+            <div class="weapon-desc">Теряешь 15% HP, но следующие 3 удара x2 к урону. КД: 3 хода. ЛУЧШЕЕ наступательное оружие — мастхэв в мета-сборках.</div>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-emoji">🤖</div>
+          <div class="weapon-info">
+            <div class="weapon-name">Костюм Робота <span class="badge mythic">Мистическое</span></div>
+            <div class="weapon-desc">Следующая защита: 100% неуязвимость на 2 хода + регенерация +50% HP. КД: 4 хода. Лучшее защитное оружие в игре.</div>
+          </div>
+        </div>
+        <div class="tip-box" style="margin-top:12px;">💡 Оружие получается через кейсы: Стартовый (3k монет), Обычный (50k), Редкий (500k), Эпик (5M). Шансы на мифическое через Эпик кейс: 15%. Дарт и Робокостюм — только Эпик кейс.</div>
+      </div>
+    </div>
+
+    <!-- ЗАВОД -->
+    <div class="card mechanic-card" style="margin-bottom:20px;">
+      <div class="card-title">🏭 Завод (Пассивный доход)</div>
+      <div class="card-body">
+        Завод генерирует урон и HP каждые 5 часов, пока ты оффлайн. Нужно зайти и <em>собрать</em> ресурсы. Детали завода:
+        <ul class="styled-list" style="margin-top:8px;">
+          <li><strong>Фотоноферма</strong> — +50 урона/5 часов (макс 5 шт)</li>
+          <li><strong>Галиеотант</strong> — +50 HP/5 часов (макс 5 шт)</li>
+          <li><strong>Ферматер</strong> — +1 500 урона/5 часов (макс 5 шт)</li>
+          <li><strong>Путимоллер</strong> — +2 500 HP/5 часов (макс 5 шт)</li>
+          <li><strong>Авто-диллер</strong> — +5 000 урона/5 часов (макс 10 шт)</li>
+          <li><strong>Авто-хиллер</strong> — +5 000 HP/5 часов (макс 10 шт)</li>
+        </ul>
+        <div class="tip-box" style="margin-top:10px;">💡 Инвестируй в завод как можно раньше. 10 Авто-диллеров = +50 000 урона каждые 5 часов без усилий. Это лучший пассивный источник прогресса в игре.</div>
+      </div>
+    </div>
+
+    <!-- МУТАЦИИ -->
+    <div class="card mechanic-card" style="margin-bottom:20px;">
+      <div class="card-title">🧬 Мутации (Лаборатория)</div>
+      <div class="card-body">
+        Мутации — пассивные бонусы, получаемые через Лабораторию. Зарабатываешь Гены → конвертируешь в открутки → получаешь случайную мутацию.
+        <ul class="styled-list" style="margin-top:8px;">
+          <li><strong>🧟 Зомби вирус</strong>: медленное убийство врага → x1.5 наград</li>
+          <li><strong>⚡ Метамутация</strong>: идеальное убийство → x2 наград</li>
+          <li><strong>🦷 Пожирание</strong>: каждый 3-й удар наносит x2 урона</li>
+          <li><strong>🔱 Гуматон</strong>: каждый 5-й удар наносит x10 урона</li>
+        </ul>
+        <div class="tip-box" style="margin-top:10px;">💡 Гуматон + Lock In — синергия мечты. Каждый 5-й удар и без того огромный множитель Lock In ещё умножается на x10.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===================== META ===================== -->
+  <div id="tab-meta" class="tab-content">
+    <div class="section-title"><span class="emoji-icon">👑</span> Мета</div>
+
+    <div class="hero-intro">
+      <h2>Что такое Мета?</h2>
+      <p><strong>Мета</strong> (от англ. <em>meta</em>) — это самые сильные, оптимальные подборки снаряжения и стратегии, которые дают максимальный результат в текущем состоянии игры. В BooBas мета вращается вокруг комбинации класса и оружия. Ниже — текущий тир-лист и описание почему каждая позиция именно там.</p>
+    </div>
+
+    <div class="card tier-s" style="margin-bottom:16px;">
+      <div style="display:flex;gap:16px;align-items:center;margin-bottom:14px;">
+        <div class="tier-badge s">S</div>
+        <div>
+          <div style="font-family:'Rajdhani',sans-serif;font-size:1.3rem;font-weight:700;">🔥 Lock In + 🎯 Дарт</div>
+          <div style="font-size:0.9rem;color:var(--text2);">Мета для урона и скоростного клиринга</div>
+        </div>
+      </div>
+      <div class="card-body">Lock In — лучший класс в игре. Каждый идеальный удар наращивает множитель х2 (3 удара = x6, 5 ударов = x10). Дарт за -15% HP даёт x2 на 3 удара. Вместе — колоссальный буст. На 5-ом идеальном хите с Дартом — x20+ к урону. Это <strong>единственная реальная сборка для Гига-рыбы и Осьминога</strong>.
+        <div class="tip-box" style="margin-top:10px;">👀 Подробнее — в разделе <strong>Сборки</strong> (Мета сборка «Урон»)</div>
+      </div>
+    </div>
+
+    <div class="card tier-s" style="margin-bottom:16px;">
+      <div style="display:flex;gap:16px;align-items:center;margin-bottom:14px;">
+        <div class="tier-badge s">S</div>
+        <div>
+          <div style="font-family:'Rajdhani',sans-serif;font-size:1.3rem;font-weight:700;">🔥 Lock In + 🤖 Костюм Робота</div>
+          <div style="font-size:0.9rem;color:var(--text2);">Мета для гига-рыбаков (эндгейм)</div>
+        </div>
+      </div>
+      <div class="card-body">Для финала — Гига-рыбы и Косатки — нужны не только урон, но и выживаемость. Костюм даёт 2 хода абсолютной неуязвимости + 50% восстановление HP. Lock In наносит дикий урон. Это сборка для <strong>топ-игроков</strong> с высокими статами.
+        <div class="tip-box" style="margin-top:10px;">👀 Подробнее — в разделе <strong>Сборки</strong> (Мета сборка «Гига-рыбак»)</div>
+      </div>
+    </div>
+
+    <div class="card tier-a" style="margin-bottom:16px;">
+      <div style="display:flex;gap:16px;align-items:center;margin-bottom:14px;">
+        <div class="tier-badge a">A</div>
+        <div>
+          <div style="font-family:'Rajdhani',sans-serif;font-size:1.3rem;font-weight:700;">🛡️ Defender + 🤖 Костюм Робота</div>
+          <div style="font-size:0.9rem;color:var(--text2);">Мета для танковой игры</div>
+        </div>
+      </div>
+      <div class="card-body">Лучшая сборка для выживания. Defender снижает урон врага на -10% за каждый идеальный в комбо — 5 идеальных = враг наносит 50% меньше. Костюм — дополнительное страхование. Отлично работает против Мега-муравья, Магма-мутанта и Косатки (которая блокирует твои удары).
+        <div class="tip-box" style="margin-top:10px;">👀 Подробнее — в разделе <strong>Сборки</strong> (Танк)</div>
+      </div>
+    </div>
+
+    <div class="card tier-b" style="margin-bottom:16px;">
+      <div style="display:flex;gap:16px;align-items:center;margin-bottom:14px;">
+        <div class="tier-badge b">B</div>
+        <div>
+          <div style="font-family:'Rajdhani',sans-serif;font-size:1.3rem;font-weight:700;">🔥 Lock In + 🌨 Снежок</div>
+          <div style="font-size:0.9rem;color:var(--text2);">Мета «Баланс» (для средней игры)</div>
+        </div>
+      </div>
+      <div class="card-body">Хорошая универсальная сборка для игроков, которые ещё не на эндгейме. Lock In даёт отличный урон, Снежок снижает входящий урон на 50% на 3 хода — незаменимо на Магме и у Пиратов. Не так мощно, как с Дартом, но безопаснее.
+        <div class="tip-box" style="margin-top:10px;">👀 Подробнее — в разделе <strong>Сборки</strong> (Баланс)</div>
+      </div>
+    </div>
+
+    <hr class="glow-divider">
+    <div class="card" style="background:linear-gradient(135deg,#f0fcff,#fff);">
+      <div class="card-title">📌 Что НЕ мета (и почему)</div>
+      <div class="card-body">
+        <ul class="styled-list">
+          <li><strong>Без класса</strong> — никаких бонусов, нет смысла использовать дольше первых 10 минут игры</li>
+          <li><strong>Vampire</strong> — интересный класс, но жертва HP за x2 опасна на высоких уровнях, где враги дамажат много. Только для опытных игроков с огромным HP</li>
+          <li><strong>Revenge</strong> — ситуативный класс, условие активации ненадёжно. Работает, но хуже Lock In во всём</li>
+          <li><strong>Фаербол/Лук оружием</strong> — слабее Дарта и Снежка по итоговому эффекту</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===================== BUILDS ===================== -->
+  <div id="tab-builds" class="tab-content">
+    <div class="section-title"><span class="emoji-icon">🛠</span> Сборки</div>
+
+    <div class="hero-intro">
+      <h2>Игровые «киты»</h2>
+      <p>Сборка — это связка Класс + Оружие, которая определяет стиль и эффективность боя. Ниже — все актуальные сборки с подробным объяснением работы каждой.</p>
+    </div>
+
+    <!-- УРОН -->
+    <div class="build-box" style="border-left:4px solid #e74c3c;">
+      <div class="build-label">🔥 Мета сборка #1</div>
+      <div class="build-title">⚔️ Урон</div>
+      <div class="build-components">
+        <span class="build-tag">🔥 Lock In</span>
+        <span class="build-tag">🎯 Дарт</span>
+      </div>
+      <div class="build-desc">
+        <strong>Принцип работы:</strong> Lock In наращивает множитель урона за каждый идеальный удар (+2 к множителю за хит: 1→x2, 2→x4, 3→x6). Дарт активируется вручную: ты теряешь 15% HP, но следующие 3 удара получают x2 бонус. В момент, когда у тебя уже 4–5 идеальных (множитель x8–x10), используешь Дарт — и буквально сносишь врага.
+        <br><br>
+        <strong>Когда использовать:</strong> На любой локации от Магмы и выше. Особенно эффективна против Гига-Осьминога, Гига-рыбы — главное не терять комбо, иначе штраф.
+        <br><br>
+        <strong>Риски:</strong> Дарт снимает HP — если HP мало, можно умереть раньше победы. Не подходит для Косатки с высоким уроном.
+      </div>
+    </div>
+
+    <!-- БАЛАНС -->
+    <div class="build-box" style="border-left:4px solid var(--accent2);">
+      <div class="build-label">⚖️ Мета сборка #2</div>
+      <div class="build-title">🌊 Баланс</div>
+      <div class="build-components">
+        <span class="build-tag">🔥 Lock In</span>
+        <span class="build-tag">🌨 Снежок</span>
+      </div>
+      <div class="build-desc">
+        <strong>Принцип работы:</strong> Lock In — всё тот же нарастающий множитель урона. Снежок — оружие, снижающее урон врага на 50% на 3 хода. Это даёт окно для безопасного стака комбо без риска умереть.
+        <br><br>
+        <strong>Когда использовать:</strong> Магма, начало Пиратской локации, врагов с высоким уроном. Также хороша, если у тебя нет Дарта.
+        <br><br>
+        <strong>Примечание:</strong> «Тупо» в плане DPS по сравнению с Дартом — Снежок не даёт урона, только защиту. Но позволяет поддерживать комбо дольше. Для средней игры — отличный выбор.
+      </div>
+    </div>
+
+    <!-- ТАНК -->
+    <div class="build-box" style="border-left:4px solid #2ecc71;">
+      <div class="build-label">🛡 Мета сборка #3</div>
+      <div class="build-title">🤖 Танк</div>
+      <div class="build-components">
+        <span class="build-tag">🛡️ Defender</span>
+        <span class="build-tag">🤖 Костюм Робота</span>
+      </div>
+      <div class="build-desc">
+        <strong>Принцип работы:</strong> Defender пассивно снижает урон врага на -10% за каждый идеальный удар в комбо. При 5 идеальных хитах враг наносит уже 50% от обычного урона. Костюм Робота при активации даёт 100% неуязвимость на 2 хода защиты + восстанавливает 50% HP после.
+        <br><br>
+        <strong>Когда использовать:</strong> Равнины (Мега-муравей с 70% защитой), Магма (Мутант), глубоководная Косатка. Идеальна для боёв, где важно не умереть, а не быстро убить.
+        <br><br>
+        <strong>Синергия:</strong> Когда Defender снизил урон до минимума + активируешь Костюм — ты практически бессмертен на несколько ходов, идеально для восстановления.
+      </div>
+    </div>
+
+    <!-- ГИГА-РЫБА -->
+    <div class="build-box" style="border-left:4px solid #f39c12; background: linear-gradient(135deg, #fffbf0, #fff8e0);">
+      <div class="build-label">👑 Только для топ-игроков</div>
+      <div class="build-title">🐋 Гига-рыбак (Мета сборка)</div>
+      <div class="build-components">
+        <span class="build-tag" style="background:#f39c12;">🔥 Lock In</span>
+        <span class="build-tag" style="background:#f39c12;">🤖 Костюм Робота</span>
+      </div>
+      <div class="build-desc">
+        <strong>Принцип работы:</strong> Для битвы с Гига-рыбой (3B HP) и Косаткой (30B HP) нужно сочетание: огромный DPS от Lock In + выживаемость от Костюма. Косатка бьёт на 1–10 миллионов урона — без Костюма на 2-ходовую неуязвимость + регенерацию 50% HP сложно пережить эти пиковые удары.
+        <br><br>
+        <strong>Почему не Дарт:</strong> Дарт снимает 15% HP — при ударах в миллионы это критично. Костюм не снимает HP и при этом восстанавливает.
+        <br><br>
+        <strong>Требования к входу:</strong> Урон 1M+, HP 50M+. Без этого — просто будешь умирать.
+        <br><br>
+        <strong>Стратегия:</strong> Стакай комбо Lock In → активируй Костюм при низком HP → пока неуязвим, продолжай идеальные удары. Повторяй.
+      </div>
+    </div>
+
+    <hr class="glow-divider">
+
+    <!-- КЛАССЫ ТАБЛИЦА -->
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-title">⚔️ Все классы игры</div>
+      <div class="card-body">
+        <table class="enemy-table">
+          <tr><th>Класс</th><th>Редкость</th><th>Способность</th><th>Шанс дропа</th></tr>
+          <tr><td>⚔️ Без класса</td><td>—</td><td>Без способностей</td><td>—</td></tr>
+          <tr><td>💢 Damager</td><td><span class="badge">Обычный</span></td><td>Хорошие удары в комбо +10% к следующему</td><td>50%</td></tr>
+          <tr><td>🛡️ Ironer</td><td><span class="badge rare">Редкий</span></td><td>Идеальный в комбо: +0.5 к множителю</td><td>25%</td></tr>
+          <tr><td>🧛 Vampire</td><td><span class="badge epic">Эпик</span></td><td>Каждый удар в комбо -5% HP, но x2 урона</td><td>15%</td></tr>
+          <tr><td>🛡️ Defender</td><td><span class="badge epic">Эпик</span></td><td>Идеальный в комбо: -10% урона врага</td><td>10%</td></tr>
+          <tr><td>✨ Ultra get</td><td><span class="badge legendary">Легенд.</span></td><td>Идеальный в комбо: +20% к урону (стак)</td><td>2%</td></tr>
+          <tr><td>⚡ Revenge</td><td><span class="badge legendary">Легенд.</span></td><td>Потеря комбо 3+ идеальных → x10 следующий</td><td>1%</td></tr>
+          <tr><td>🔥 Lock In</td><td><span class="badge legendary">Легенд.</span></td><td>Идеальный в комбо: +2 к множителю (1→x2...)</td><td>1%</td></tr>
+        </table>
+        <div class="tip-box" style="margin-top:12px;">💡 Lock In доступен также через Акцию: 1500💰 + 2🎫 + класс Lock In за 50⭐ в Telegram Stars. Если хочешь метовый класс без фарма кейсов — это самый надёжный способ.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===================== TACTICS ===================== -->
+  <div id="tab-tactics" class="tab-content">
+    <div class="section-title"><span class="emoji-icon">🗡</span> Тактики</div>
+
+    <div class="hero-intro">
+      <h2>Тактики против конкретных врагов</h2>
+      <p>Каждый враг требует своего подхода. Некоторые нужно убивать быстро, другие — пережить. Здесь собраны проверенные тактики для самых сложных противников игры.</p>
+    </div>
+
+    <div class="card tactic-card" style="margin-bottom:16px;">
+      <div class="card-title">🐬 Глубоководная Косатка — только с Defender</div>
+      <div class="card-body">
+        Косатка — финальный босс игры. Её особенность: <strong>10% шанс абсолютной блокировки урона</strong> (твой удар засчитывается, но ноль урона). При этом сама она бьёт на 1–10 миллионов.
+        <br><br>
+        <strong>Тактика:</strong>
+        <ul class="styled-list" style="margin-top:8px;">
+          <li>Используй <strong>Defender</strong> — каждый идеальный снижает её урон на -10%. Накопи 5+ идеальных = она бьёт вполовину слабее.</li>
+          <li>Держи <strong>Костюм Робота</strong> в запасе — используй при низком HP для 2-ходовой неуязвимости и восстановления 50% HP.</li>
+          <li>Не паникуй при блоке атаки — просто продолжай серию идеальных. Комбо не сбрасывается от блока.</li>
+          <li>Если урон 1M+ — бой реален. Если меньше — потребует очень много времени, фарми сначала.</li>
+        </ul>
+        <div class="warn-box" style="margin-top:10px;">⚠️ Lock In здесь работает, но риск от высокого урона Косатки высокий. Defender надёжнее для выживания на этом боссе.</div>
+      </div>
+    </div>
+
+    <div class="card tactic-card" style="margin-bottom:16px;">
+      <div class="card-title">🐋 Гига-рыба — комбо любой ценой</div>
+      <div class="card-body">
+        3 миллиарда HP. При потере комбо — <strong>0% урона на 3 хода</strong>. Это самый жёсткий штраф в игре.
+        <br><br>
+        <strong>Тактика:</strong>
+        <ul class="styled-list" style="margin-top:8px;">
+          <li>Перед боем убедись, что у тебя Lock In или хотя бы Ultra get — без множителя бой займёт вечность.</li>
+          <li>Никогда не торопись — лучше подождать правильный тайминг, чем промахнуться и потерять 3 хода.</li>
+          <li>Используй <strong>Снежок</strong> в начале боя — снижение урона рыбы даёт время накопить комбо без страха смерти.</li>
+          <li>Костюм Робота — страховка при критическом HP.</li>
+        </ul>
+        <div class="tip-box" style="margin-top:10px;">💡 Первые 5 идеальных ударов с Lock In = x10 множитель. При 1M базового урона — это уже 10M за удар. Дальше Дарт даёт ещё x2 = 20M за удар. Вот почему это реальный эндгейм.</div>
+      </div>
+    </div>
+
+    <div class="card tactic-card" style="margin-bottom:16px;">
+      <div class="card-title">🐙 Гига-Осьминог — не дай ему шанса</div>
+      <div class="card-body">
+        3 миллиона HP, урон 20–50k. Штраф при потере комбо — 0% урона на 3 хода (аналогично рыбе, но меньше HP).
+        <br><br>
+        <strong>Тактика:</strong>
+        <ul class="styled-list" style="margin-top:8px;">
+          <li>Lock In + Дарт — стандартная мета. При 3+ идеальных активируй Дарт: следующие 3 удара x2, а твой множитель уже x6 = x12 суммарно.</li>
+          <li>Если нет Дарта — используй Снежок для снижения его урона (он бьёт до 50k).</li>
+          <li>Будь аккуратен с таймингами — лучше 1 промах заплатить HP, чем потерять 3 хода урона.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card tactic-card" style="margin-bottom:16px;">
+      <div class="card-title">🐜 Мега-муравей — защита от дефенса</div>
+      <div class="card-body">
+        20 000 HP, урон 500–510, но главная проблема — 70% шанс уйти в защиту! Это значит почти каждый второй твой удар заблокирован.
+        <br><br>
+        <strong>Тактика:</strong>
+        <ul class="styled-list" style="margin-top:8px;">
+          <li>Defender + Костюм — лучший вариант. Пока Муравей защищается, Defender не теряет своё накопление.</li>
+          <li>Шипы (оружие) — когда Муравей атакует, следующие 3 его удара возвращают ему 50% урона. Очень эффективно!</li>
+          <li>Не используй Дарт здесь — Муравей защищается слишком часто, Дарт зарядится, а нанести урон не дадут.</li>
+          <li>Терпение — просто жди, пока он перестанет защищаться, и бей точно.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card tactic-card" style="margin-bottom:16px;">
+      <div class="card-title">🧟 Магма Мутант — быстро и точно</div>
+      <div class="card-body">
+        170 000 HP, 70% шанс защиты, урон 2–5k. Даёт золотой билет — ценный трофей.
+        <br><br>
+        <strong>Тактика:</strong>
+        <ul class="styled-list" style="margin-top:8px;">
+          <li>Lock In + Дарт — лучший способ снести его в окно между защитами.</li>
+          <li>Если нет Lock In: Ultra get или Ironer. Главное — набрать хорошее комбо идеальных.</li>
+          <li>Используй Дарт когда у тебя 3+ идеальных — это даёт максимальный урон в окно атаки (30% времени когда он не защищается).</li>
+          <li>Не забывай — он сбивает комбо! Будь готов к сбросу.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card tactic-card" style="margin-bottom:16px;">
+      <div class="card-title">🦀 Краб — держи комбо</div>
+      <div class="card-body">
+        500 000 HP, урон 10–20k. Сбивает комбо, штраф 0.9x урона на 3 хода (минус 10%).
+        <br><br>
+        <strong>Тактика:</strong>
+        <ul class="styled-list" style="margin-top:8px;">
+          <li>Штраф Краба мягче — только -10% на 3 хода. Можно терпеть.</li>
+          <li>Lock In + Снежок — снижение его урона помогает избежать смерти, пока стакаешь комбо.</li>
+          <li>Revenge тут неплохо работает — Краб часто сбивает комбо, значит Revenge часто активируется (x10 следующий удар).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card tactic-card" style="margin-bottom:16px;">
+      <div class="card-title">👾 Магма Суфик — не теряй фокус</div>
+      <div class="card-body">
+        25 000 HP, урон 1.5–3k, сбивает комбо. Это тренировочный враг перед Мутантом.
+        <br><br>
+        <strong>Тактика:</strong>
+        <ul class="styled-list" style="margin-top:8px;">
+          <li>Revenge класс тут хорош — Суфик регулярно сбивает комбо = постоянные x10 удары.</li>
+          <li>Если Revenge нет — просто Lock In и старайся держать идеальные. После сброса быстро набирай заново.</li>
+          <li>Снежок уменьшит входящий урон 1.5–3k что позволит спокойнее набирать комбо.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Наверх">↑</button>
+
+<script>
+  // TAB SYSTEM
+  function showTab(tabName) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tabName).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  // 3D TILT EFFECT
+  function addTilt(el) {
+    el.addEventListener('mousemove', e => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      const rotX = ((y - cy) / cy) * -6;
+      const rotY = ((x - cx) / cx) * 6;
+      el.style.transform = `perspective(700px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-3px)`;
+      el.style.transition = 'transform 0.05s';
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = '';
+      el.style.transition = 'transform 0.35s ease';
+    });
+  }
+
+  document.querySelectorAll('.card, .build-box').forEach(addTilt);
+
+  // Scroll top visibility
+  const scrollBtn = document.querySelector('.scroll-top');
+  window.addEventListener('scroll', () => {
+    scrollBtn.style.opacity = window.scrollY > 200 ? '1' : '0';
+    scrollBtn.style.pointerEvents = window.scrollY > 200 ? 'all' : 'none';
+  });
+  scrollBtn.style.opacity = '0';
+  scrollBtn.style.pointerEvents = 'none';
+  scrollBtn.style.transition = 'opacity 0.3s';
+</script>
+
+</body>
+</html>
